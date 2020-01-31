@@ -1,0 +1,12 @@
+Package: HP
+Type: Package
+Title: Partition the Data into Heterogeneous Groups Characterized by Different Regression Functions
+Version: 0.1.0
+Author: Wenda Tu [aut, cre],
+Maintainer: Wenda Tu <wenda-tu@uiowa.edu>
+Description: A toolkit to pursue heterogeneity in regression functions for a given dataset. The package partitions the data into the multiple groups under pre-specified “proximity graph” and number of clusters. 
+Imports: irlba, Matrix, methods, utils, stats
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
