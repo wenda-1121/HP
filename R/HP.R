@@ -9,7 +9,7 @@
 #' @param n sample size
 
 #' @return updated result of the primal proximal
-#' @export
+#' @noRd
 
 R.f <- function(x, y, beta, alpha, n){
 
@@ -297,7 +297,7 @@ HP <- function(X, y, tau = NULL, method,
     cc <- length(unique(membership.chosen))
 
     res.list <- list(membership = membership.chosen)
-    LM <- list()
+    model <- list()
 
     for (c in 1:cc){
 
@@ -310,11 +310,11 @@ HP <- function(X, y, tau = NULL, method,
 
         y.G <- y[index.G]
         X.G <- X[index.G,]
-        LM[[(c)]] <- lm(y.G ~ X.G - 1)
-        names(LM)[c] <- paste("lm", c, sep = "")
+        model[[(c)]] <- lm(y.G ~ X.G - 1)
+        names(model)[c] <- paste("lm", c, sep = "")
     }
-    
-    res.list$LM <- LM
+
+    res.list$model <- model
 
     return(res.list)
 }
