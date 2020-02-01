@@ -297,6 +297,7 @@ HP <- function(X, y, tau = NULL, method,
     cc <- length(unique(membership.chosen))
 
     res.list <- list(membership = membership.chosen)
+    LM <- list()
 
     for (c in 1:cc){
 
@@ -309,9 +310,11 @@ HP <- function(X, y, tau = NULL, method,
 
         y.G <- y[index.G]
         X.G <- X[index.G,]
-        res.list[[(c+1)]] <- lm(y.G ~ X.G - 1)
-        names(res.list)[c+1] <- paste("lm", c, sep = "")
+        LM[[(c)]] <- lm(y.G ~ X.G - 1)
+        names(LM)[c] <- paste("lm", c, sep = "")
     }
+    
+    res.list$LM <- LM
 
     return(res.list)
 }
