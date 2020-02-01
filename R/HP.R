@@ -9,7 +9,7 @@
 #' @param n sample size
 
 #' @return updated result of the primal proximal
-#' @noRd
+#' @export
 
 R.f <- function(x, y, beta, alpha, n){
 
