@@ -138,7 +138,7 @@ summary.cwr <- function(model.list){
     res <- list()
 
     for (k in 1:K){
-        res[[k]] <- summary(model.list[[k]])
+        res[[k]] <- summary.lm(model.list[[k]])
         names(res)[k] <- paste("lm", k, ".summary", sep = "")
     }
 
