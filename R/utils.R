@@ -156,8 +156,8 @@ sortIndex <- function(X, decrease = F){
 #'
 #'  ## summary of the first subgroup model ##
 #' s1 <- s$lm1.summary
-#' coef(s1) # beta estimates of the first group
-#' print(s1) # model diagnostics of the first group
+#' coef(s1) # regression coefficient estimates of the first group
+#' s1
 #' @export
 
 summary.cwr <- function(object, ...){

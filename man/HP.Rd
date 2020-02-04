@@ -27,7 +27,7 @@ HP(X, y, tau = NULL, method, Xj = NULL, K = 3,
 \item{max.no.cluster}{If no.cluster.search = TRUE, it is the max number of clusters which the data is partitioned into; if no.cluster.search = FALSE, max.no.cluster is the user-specified cluster numbers. The default value is max(n^(1/3), 5).}
 }
 \value{
-a list that contains (i). a vector of membership indicators; (ii). the OLS fit of each sub-model.
+a list of length (K + 1), where K is the number of subgroups. The first element in the list is a vector of membership indicators and the rest of the list elements are the R lm objects for each subgroup.
 }
 \description{
 Perform heterogeneity pursuit on the given dataset
@@ -55,8 +55,8 @@ y[index.g2] <- y.g2
 
 y <- y + rnorm(n = n, sd = 0.5)
 
-HP(X, y, method = "mst", Xj = X[,1], max.no.cluster = 2)
-HP(X, y, method = "knn", Xj = X[,1], max.no.cluster = 2)
-HP(X, y, method = "latent", max.no.cluster = 2)
-HP(X, y, method = "knn", Xj = X[,1])
+res.mst <- HP(X, y, method = "mst", Xj = X[,1], max.no.cluster = 2)
+m.mst <- res.mst$membership
+lm1 <- res.mst$lm1
+lm2 <- res.mst$lm2
 }

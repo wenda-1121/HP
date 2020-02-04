@@ -195,7 +195,7 @@ cluster <- function(B.hat, C){
 #' @param  no.cluster.search TRUE or FALSE; if TRUE, the optimal number of clusters is decided based on some information criterion.
 #' @param IC  IC = c("aic", "bic", "mdl"), the information criterion based on which the cluster number of the dataset is determined; default is IC = "bic".
 #' @param max.no.cluster If no.cluster.search = TRUE, it is the max number of clusters which the data is partitioned into; if no.cluster.search = FALSE, max.no.cluster is the user-specified cluster numbers. The default value is max(n^(1/3), 5).
-#' @return a list that contains (i). a vector of membership indicators; (ii). the OLS fit of each sub-model.
+#' @return a list of length (K + 1), where K is the number of subgroups. The first element in the list is a vector of membership indicators and the rest of the list elements are the R lm objects for each subgroup.
 #' @examples
 #'
 #'
@@ -219,10 +219,10 @@ cluster <- function(B.hat, C){
 #'
 #' y <- y + rnorm(n = n, sd = 0.5)
 #'
-#' HP(X, y, method = "mst", Xj = X[,1], max.no.cluster = 2)
-#' HP(X, y, method = "knn", Xj = X[,1], max.no.cluster = 2)
-#' HP(X, y, method = "latent", max.no.cluster = 2)
-#' HP(X, y, method = "knn", Xj = X[,1])
+#' res.mst <- HP(X, y, method = "mst", Xj = X[,1], max.no.cluster = 2)
+#' m.mst <- res.mst$membership
+#' lm1 <- res.mst$lm1
+#' lm2 <- res.mst$lm2
 #' @export HP
 
 HP <- function(X, y, tau = NULL, method,
@@ -297,7 +297,6 @@ HP <- function(X, y, tau = NULL, method,
     cc <- length(unique(membership.chosen))
 
     res.list <- list(membership = membership.chosen)
-    model <- list()
 
     for (c in 1:cc){
 
@@ -310,11 +309,10 @@ HP <- function(X, y, tau = NULL, method,
 
         y.G <- y[index.G]
         X.G <- X[index.G,]
-        model[[(c)]] <- lm(y.G ~ X.G - 1)
-        names(model)[c] <- paste("lm", c, sep = "")
+        res.list[[(c+1)]] <- lm(y.G ~ X.G - 1)
+        names(model)[(c+1)] <- paste("lm", c, sep = "")
     }
 
-    res.list$model <- model
     class(res.list) <- "cwr"
 
     return(res.list)
