@@ -165,14 +165,13 @@ summary.cwr <- function(object, ...){
     res.list <- object
 
     membership <- res.list$membership
-    model <- res.list$model
 
-    K <- length(model)
+    K <- length(res.list) - 1
 
     res <- list()
 
     for (k in 1:K){
-        res[[k]] <- summary.lm(model[[k]], ...)
+        res[[k]] <- summary.lm(res.list[[k+1]], ...)
         names(res)[k] <- paste("lm", k, ".summary", sep = "")
     }
 
