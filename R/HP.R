@@ -310,7 +310,7 @@ HP <- function(X, y, tau = NULL, method,
         y.G <- y[index.G]
         X.G <- X[index.G,]
         res.list[[(c+1)]] <- lm(y.G ~ X.G - 1)
-        names(model)[(c+1)] <- paste("lm", c, sep = "")
+        names(res.list)[(c+1)] <- paste("lm", c, sep = "")
     }
 
     class(res.list) <- "cwr"
