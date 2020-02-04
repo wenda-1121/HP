@@ -167,16 +167,22 @@ summary.cwr <- function(object, ...){
     membership <- res.list$membership
 
     K <- length(res.list) - 1
-
-    res <- list()
+    res.n <- table(membership)
 
     for (k in 1:K){
-        res[[k]] <- summary.lm(res.list[[k+1]], ...)
-        names(res)[k] <- paste("lm", k, ".summary", sep = "")
+        names(res.n)[k] <- paste("G", k, sep = "")
     }
 
-    return(res)
+    res$group.size <- res.n
 
+    for (k in 1:K){
+        res[[k+1]] <- summary.lm(res.list[[k+1]], ...)
+        names(res)[k+1] <- paste("lm", k, ".summary", sep = "")
+    }
+
+    class(res) <- "summary.hp"
+
+    return(res)
 }
 
 
