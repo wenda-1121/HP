@@ -7,13 +7,42 @@
 \method{summary}{cwr}(object, ...)
 }
 \arguments{
-\item{object}{a list of lm objects}
+\item{object}{a cwr object returned by function HP}
 
 \item{...}{further arugments to be passed to}
 }
 \value{
-a list of length K, where K is the number of clusters and each list element is an OLS summary of a subgroup model
+a list of "summary.lm" objects, with each object a summary of the linear model of a subgroup.
 }
 \description{
 OLS summary of the clusterwise regression (cwr) models
+}
+\examples{
+n <- 50
+p <- 3
+
+X <- matrix(rnorm(n * p), nrow = n)
+Xj <- X[,1] # the threshold variable
+beta1 <- rep(3,p)
+beta2 <- rep(-3,p)
+
+index.g1 <- which(Xj <= 0)
+index.g2 <- which(Xj > 0)
+
+y.g1 <- X[index.g1,] \%*\% beta1
+y.g2 <- X[index.g2,] \%*\% beta2
+
+y <- rep(0,n)
+y[index.g1] <- y.g1
+y[index.g2] <- y.g2
+
+y <- y + rnorm(n = n, sd = 0.5)
+
+res <- HP(X, y, method = "mst", Xj = X[,1], max.no.cluster = 2)
+s <- summary(res)
+
+ ## summary of the first subgroup model ##
+s1 <- s$lm1.summary
+coef(s1) # beta estimates of the first group
+print(s1) # model diagnostics of the first group
 }
