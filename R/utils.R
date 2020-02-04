@@ -122,7 +122,7 @@ sortIndex <- function(X, decrease = F){
 }
 
 
-#' summary.cwr
+#' summary.hp
 #'
 #' OLS summary of the clusterwise regression (cwr) models
 #'
@@ -160,7 +160,7 @@ sortIndex <- function(X, decrease = F){
 #' s1
 #' @export
 
-summary.cwr <- function(object, ...){
+summary.hp <- function(object, ...){
 
     res.list <- object
 

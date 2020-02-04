@@ -313,7 +313,7 @@ HP <- function(X, y, tau = NULL, method,
         names(res.list)[(c+1)] <- paste("lm", c, sep = "")
     }
 
-    class(res.list) <- "cwr"
+    class(res.list) <- "hp"
 
     return(res.list)
 }
