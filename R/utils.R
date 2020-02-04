@@ -182,13 +182,34 @@ summary.hp <- function(object, ...){
         names(res)[k+1] <- paste("lm", k, ".summary", sep = "")
     }
 
-    class(res) <- "summary.hp"
-
     return(res)
 }
 
 
+summary.hp <- function(object, ...){
 
+    res.list <- object
+
+    membership <- res.list$membership
+
+    K <- length(res.list) - 1
+    res.n <- table(membership)
+
+    res <- list()
+
+    for (k in 1:K){
+        names(res.n)[k] <- paste("G", k, sep = "")
+    }
+
+    res$group.size <- res.n
+
+    for (k in 1:K){
+        res[[k+1]] <- summary.lm(res.list[[k+1]], ...)
+        names(res)[k+1] <- paste("lm", k, ".summary", sep = "")
+    }
+
+    return(res)
+}
 
 
 
