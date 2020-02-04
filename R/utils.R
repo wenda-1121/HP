@@ -169,6 +169,8 @@ summary.cwr <- function(object, ...){
     K <- length(res.list) - 1
     res.n <- table(membership)
 
+    res <- list()
+
     for (k in 1:K){
         names(res.n)[k] <- paste("G", k, sep = "")
     }
