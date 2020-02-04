@@ -122,27 +122,36 @@ sortIndex <- function(X, decrease = F){
 }
 
 
-#' summary_cwr
+#' summary.cwr
 #'
 #' OLS summary of the clusterwise regression (cwr) models
 #'
-#' @param model.list a list of lm objects
+#' @param object a list of lm objects
+#' @param ... further arugments to be passed to
 #' @return a list of length K, where K is the number of clusters and each list element is an OLS summary of a subgroup model
 #'
 #' @export
 
-summary_cwr <- function(model.list){
+summary.cwr <- function(object, ...){
 
-    K <- length(model.list)
+    res.list <- object
+
+    membership <- res.list$membership
+    model <- res.list$model
+
+    K <- length(model)
 
     res <- list()
 
     for (k in 1:K){
-        res[[k]] <- summary.lm(model.list[[k]])
+        res[[k]] <- summary.lm(model[[k]], ...)
         names(res)[k] <- paste("lm", k, ".summary", sep = "")
     }
 
+    class(res) <- "summary.cwr"
+
     return(res)
+
 }
 
 
