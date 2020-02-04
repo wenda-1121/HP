@@ -4,10 +4,12 @@
 \alias{summary.cwr}
 \title{summary.cwr}
 \usage{
-\method{summary}{cwr}(model.list)
+\method{summary}{cwr}(object, ...)
 }
 \arguments{
-\item{model.list}{a list of lm objects}
+\item{object}{a list of lm objects}
+
+\item{...}{further arugments to be passed to}
 }
 \value{
 a list of length K, where K is the number of clusters and each list element is an OLS summary of a subgroup model

@@ -315,6 +315,7 @@ HP <- function(X, y, tau = NULL, method,
     }
 
     res.list$model <- model
+    class(res.list) <- "cwr"
 
     return(res.list)
 }
