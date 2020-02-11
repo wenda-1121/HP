@@ -1,4 +1,4 @@
-Package: HP
+Package: RHP
 Type: Package
 Title: Partition the Data into Heterogeneous Groups Characterized by Different Regression Functions
 Version: 0.1.0
